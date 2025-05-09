@@ -1,0 +1,41 @@
+﻿@model List<IntergalacticRaceLeague.Models.RaceResult>
+
+<h2>Winners</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>Race Name</th>
+            <th>Racer Name(s)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (RaceResult result in Model)
+        {
+            <tr>
+                <td>@result.Position</td>
+                <td>@result.RaceName</td>
+                <td>
+                    @if (result.Racers.Any())
+                    {
+                        @string.Join(", ", result.Racers.Select(r => r.Name))
+                    }
+                    else
+                    {
+                        <span>No racers</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="DeleteResultConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@result.RaceResultId" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Tournament")" class="btn btn-secondary">Back to Tournaments</a>

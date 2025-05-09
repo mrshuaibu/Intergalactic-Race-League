@@ -1,0 +1,40 @@
+﻿@model IntergalacticRaceLeague.Models.Racer
+
+<h2>Racer Profile - @Model.Name</h2>
+
+<div>
+    <strong>Name:</strong> @Model.Name
+</div>
+<div>
+    <strong>Age:</strong> @Model.Age
+</div>
+<div>
+    <strong>Country:</strong> @Model.Country
+</div>
+<div>
+    <strong>Vehicle:</strong> @Model.Vehicle?.Name 
+</div>
+
+<h3>Tournaments Participated In</h3>
+@if (Model.Tournaments.Any())
+{
+    <ul>
+        @foreach (var tournament in Model.Tournaments)
+        {
+            <li>
+                <strong>@tournament.TournamentName</strong><br />
+                Start Date: @tournament.StartDate.ToShortDateString() <br />
+                End Date: @tournament.EndDate.ToShortDateString() <br />
+                Location: @tournament.Location <br />
+                <hr />
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No tournaments associated with this racer.</p>
+}
+
+
+<a href="@Url.Action("Index")" class="btn btn-secondary">Back to Racers List</a>

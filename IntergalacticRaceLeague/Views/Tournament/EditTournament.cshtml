@@ -1,0 +1,38 @@
+﻿@model IntergalacticRaceLeague.Models.Tournament
+
+@{
+    ViewData["Title"] = "Edit Tournament";
+}
+
+<h2>Edit Tournament</h2>
+
+<form asp-action="EditTournament" method="post">
+    <input type="hidden" asp-for="TournamentId" />
+
+    <div class="mb-3">
+        <label asp-for="TournamentName" class="form-label">Tournament Name</label>
+        <input asp-for="TournamentName" class="form-control" required/>
+        <span asp-validation-for="TournamentName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartDate" class="form-label">Start Date</label>
+        <input asp-for="StartDate" class="form-control" type="datetime-local" required />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EndDate" class="form-label">End Date</label>
+        <input asp-for="EndDate" class="form-control" type="datetime-local" required />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label">Location</label>
+        <input asp-for="Location" class="form-control" required />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

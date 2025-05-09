@@ -1,0 +1,57 @@
+﻿@model IntergalacticRaceLeague.Models.RaceResult
+
+<h2>Record Race Result</h2>
+
+<form asp-action="RecordRace" method="post">
+    <div class="mb-3">
+        <label asp-for="RaceName" class="form-label">Race Name</label>
+        <input asp-for="RaceName" class="form-control" />
+        <span asp-validation-for="RaceName" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Position" class="form-label">Racer Position</label>
+        <input asp-for="Position" class="form-control" />
+        <span asp-validation-for="Position" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TournamentId" class="form-label">Select Tournament</label>
+        <select asp-for="TournamentId" class="form-control">
+            <option value="">-- Select Tournament --</option>
+            @if (ViewBag.Tournaments != null)
+            {
+                foreach (Tournament tournament in ViewBag.Tournaments)
+                {
+                    <option value="@tournament.TournamentId">@tournament.TournamentName</option>
+                }
+            }
+            else
+            {
+                <option disabled>No tournaments available</option>
+            }
+        </select>
+        <span asp-validation-for="TournamentId" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Select Racer</label>
+        <select asp-for="SelectedRacersIds" class="form-control" multiple="multiple">
+            @if (ViewBag.Racers != null)
+            {
+                foreach (Racer racer in ViewBag.Racers)
+                {
+                    <option value="@racer.RacerId">@racer.Name</option>
+                }
+            }
+            else
+            {
+                <option disabled>No racers available</option>
+            }
+        </select>
+        <span asp-validation-for="SelectedRacersIds" class="text-danger fw-bold"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Race Result</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

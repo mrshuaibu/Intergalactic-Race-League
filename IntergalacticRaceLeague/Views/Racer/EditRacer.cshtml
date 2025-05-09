@@ -1,0 +1,55 @@
+﻿@model IntergalacticRaceLeague.Models.Racer
+
+@{
+    ViewData["Title"] = "Edit Racer";
+}
+
+<h2>Edit Racer</h2>
+
+<form asp-action="EditRacer" method="post">
+    <input type="hidden" asp-for="RacerId" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Racer Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Age" class="form-label">Racer Age</label>
+        <input asp-for="Age" class="form-control" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Country" class="form-label">Racer Country</label>
+        <input asp-for="Country" class="form-control" />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="VehicleId" class="form-label">Select Vehicle</label>
+        <select asp-for="VehicleId" class="form-control">
+            <option value="">-- Select Vehicle --</option>
+            @foreach (Vehicle vehicle in ViewBag.Vehicles)
+            {
+                <option value="@vehicle.VehicleId">@vehicle.Name</option>
+            }
+        </select>
+        <span asp-validation-for="VehicleId" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Select Tournaments</label>
+        <select asp-for="SelectedTournamentIds" class="form-control" multiple>
+            @foreach (var tournament in ViewBag.Tournaments)
+            {
+                <option value="@tournament.TournamentId">@tournament.TournamentName</option>
+            }
+        </select>
+        <span asp-validation-for="SelectedTournamentIds" class="text-danger fw-bold"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,30 @@
+﻿@model List<IntergalacticRaceLeague.Models.Racer>
+
+<h2>Racers List</h2>
+<a href="@Url.Action("AddRacer")" class="btn btn-primary">Add Racer</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Racer racer in Model)
+        {
+            <tr>
+                <td>@racer.Name</td>
+                <td>
+                    <a href="@Url.Action("EditRacer", new { id = racer.RacerId })" class="btn btn-warning">Edit</a>
+
+                    <a href="@Url.Action("ViewProfile", new { id = racer.RacerId })" class="btn btn-info">View Profile</a>
+
+                    <form asp-action="DeleteRacerConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@racer.RacerId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

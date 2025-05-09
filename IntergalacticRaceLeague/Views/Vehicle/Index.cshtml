@@ -1,0 +1,36 @@
+﻿@model IEnumerable<IntergalacticRaceLeague.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Vehicle List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="AddVehicle" class="btn btn-primary">Add New Vehicle</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Vehicle Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Vehicle vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.Name</td>
+                <td>
+                    <a asp-action="EditVehicle" asp-route-id="@vehicle.VehicleId" class="btn btn-warning">Edit</a>
+
+                    <form asp-action="DeleteVehicleConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@vehicle.VehicleId" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

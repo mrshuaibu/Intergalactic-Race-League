@@ -1,0 +1,63 @@
+﻿@model IntergalacticRaceLeague.Models.Statistics
+
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<div class="container mt-4">
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <p class="lead">Explore the latest race statistics and top-performing racers and tournaments.</p>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Racers</h5>
+                    <h2 class="fw-bold">@Model.TotalRacers</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Tournaments</h5>
+                    <h2 class="fw-bold">@Model.TotalTournaments</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Vehicles</h5>
+                    <h2 class="fw-bold">@Model.TotalVehicles</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h3 class="mb-3 text-secondary">🏎️ Top Racers</h3>
+        <div class="list-group">
+            @foreach (var racer in Model.TopRacers)
+            {
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>@racer.Name</strong>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h3 class="mb-3 text-secondary">🏆 Top Tournaments</h3>
+        <div class="list-group">
+            @foreach (var tournament in Model.TopTournaments)
+            {
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>@tournament.TournamentName</strong>
+                </div>
+            }
+        </div>
+    </div>
+</div>

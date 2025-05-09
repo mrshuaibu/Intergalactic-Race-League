@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IntergalacticRaceLeague.Models.Tournament>
+
+@{
+    ViewData["Title"] = "Tournaments";
+}
+
+<h2>Tournaments</h2>
+
+<a href="@Url.Action("AddTournament", "Tournament")" class="btn btn-primary mb-3">Add Tournament</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tournament Name</th>
+            <th>Tournament Location</th>
+            <th>Tournament Start Date</th>
+            <th>Tournament End Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tournament in Model)
+        {
+            <tr>
+                <td>@tournament.TournamentName</td>
+                <td>@tournament.Location</td>
+                <td>@tournament.StartDate.ToString("MM/dd/yyyy")</td>
+                <td>@tournament.EndDate.ToString("MM/dd/yyyy")</td>
+                <td>
+                    <a href="@Url.Action("EditTournament", "Tournament", new { id = tournament.TournamentId })" class="btn btn-warning btn-sm">Edit</a>
+
+                    <form asp-action="DeleteTournamentConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@tournament.TournamentId" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+
+                    <a href="@Url.Action("ViewWinners", "Tournament", new { tournamentId = tournament.TournamentId })" class="btn btn-info btn-sm">View Results</a>
+
+                    <a href="@Url.Action("RecordRace", "Tournament", new { tournamentId = tournament.TournamentId })" class="btn btn-success btn-sm">Record Race</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
